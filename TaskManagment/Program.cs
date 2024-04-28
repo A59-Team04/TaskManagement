@@ -1,4 +1,4 @@
-﻿namespace TaskManagment
+﻿namespace TaskManagement
 {
     internal class Program
     {
