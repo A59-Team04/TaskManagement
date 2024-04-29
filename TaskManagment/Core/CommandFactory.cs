@@ -28,24 +28,26 @@ namespace TaskManagement.Core
 
             switch (commandType)
             {
-                case CommandType.RegisterUser:
+                //TO DO
+                case CommandType.CreatePerson:
                     throw new NotImplementedException();
-                case CommandType.Login:
+                case CommandType.ShowPeople:
                     throw new NotImplementedException();
-                case CommandType.Logout:
+                case CommandType.ShowPersonActivity:
                     throw new NotImplementedException();
-                case CommandType.AddVehicle:
+                case CommandType.CreateTeam:
                     throw new NotImplementedException();
-                case CommandType.RemoveVehicle:
+                case CommandType.ShowTeams:
                     throw new NotImplementedException();
-                case CommandType.AddComment:
+                case CommandType.ShowTeamActivity:
                     throw new NotImplementedException();
-                case CommandType.RemoveComment:
+                case CommandType.AddPersonToTeam:
                     throw new NotImplementedException();
-                case CommandType.ShowUsers:
-                    
+                case CommandType.ShowTeamMembers:
                     throw new NotImplementedException();
-                case CommandType.ShowVehicles:
+                case CommandType.ShowTeamBoards:
+                    throw new NotImplementedException();                
+                case CommandType.ShowBoardActivity:
                     throw new NotImplementedException();
                 default:
                     throw new InvalidUserInputException($"Command with name: {commandType} doesn't exist!");

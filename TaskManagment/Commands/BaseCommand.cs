@@ -10,9 +10,6 @@ namespace TaskManagement.Commands
 {
     public abstract class BaseCommand : ICommand
     {
-        protected const string UserAlreadyLoggedIn = "User {0} is logged in! Please log out first!";
-        private const string LoginRequiredError = "This command requires login first.";
-
         protected BaseCommand(IRepository repository)
             : this(new List<string>(), repository)
         {
@@ -24,22 +21,11 @@ namespace TaskManagement.Commands
             this.Repository = repository;
         }
 
-        public string Execute()
-        {
-            if (this.RequireLogin && this.Repository.LoggedUser == null)
-            {
-                throw new AuthorizationException(LoginRequiredError);
-            }
-            return this.ExecuteCommand();
-        }
+        public abstract string Execute();
 
         protected IRepository Repository { get; }
 
         protected IList<string> CommandParameters { get; }
-
-        protected abstract bool RequireLogin { get; }
-
-        protected abstract string ExecuteCommand();
 
         protected int ParseIntParameter(string value, string parameterName)
         {
@@ -68,7 +54,7 @@ namespace TaskManagement.Commands
             throw new InvalidUserInputException($"Invalid value for {parameterName}. Should be either true or false.");
         }
 
-        protected Role ParseRoleParameter(string value, string parameterName)
+/*        protected Role ParseRoleParameter(string value, string parameterName)
         {
             if (Enum.TryParse(value, true, out Role result))
             {
@@ -84,6 +70,6 @@ namespace TaskManagement.Commands
                 return result;
             }
             throw new InvalidUserInputException($"Invalid value for {parameterName}. Should be either a valid vehicle type.");
-        }
+        }*/
     }
 }
