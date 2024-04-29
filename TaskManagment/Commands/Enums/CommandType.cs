@@ -3,9 +3,9 @@
     public enum CommandType
     {
         CreatePerson,
+        CreateTeam,
         ShowPeople,
         ShowPersonActivity,
-        CreateTeam,
         ShowTeams,
         ShowTeamActivity,
         AddPersonToTeam,
