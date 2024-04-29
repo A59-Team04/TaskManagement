@@ -9,6 +9,7 @@ namespace TaskManagement.Commands
 {
     public class ShowPersonActivity : BaseCommand
     {
+        public const int ExpectedNumberOfArguments = 3;
         public ShowPersonActivity(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {

@@ -9,6 +9,7 @@ namespace TaskManagement.Commands
 {
     public class CreatePerson : BaseCommand
     {
+        public const int ExpectedNumberOfArguments = 3;
         public CreatePerson(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {

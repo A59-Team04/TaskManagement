@@ -9,6 +9,7 @@ namespace TaskManagement.Commands
 {
     public class CreateTeam : BaseCommand
     {
+        public const int ExpectedNumberOfArguments = 3;
         public CreateTeam(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
