@@ -8,17 +8,17 @@ using TaskManagement.Exceptions;
 
 namespace TaskManagement.Commands
 {
-    public class CreateTeam : BaseCommand
+    public class ShowTeamMembersCommand : BaseCommand
     {
         public const int ExpectedNumberOfArguments = 3;
-        public CreateTeam(IList<string> commandParameters, IRepository repository)
+        public ShowTeamMembersCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
         }
 
         public override string Execute()
         {
-            if (CommandParameters.Count < ExpectedNumberOfArguments)
+            if (CommandParameters.Count != ExpectedNumberOfArguments)
             {
                 throw new InvalidUserInputException($"Invalid number of arguments. Expected: {ExpectedNumberOfArguments}, Received: {CommandParameters.Count}");
             }

@@ -30,7 +30,7 @@ namespace TaskManagement.Core
             {
                 //TO DO
                 case CommandType.CreatePerson:
-                    throw new NotImplementedException();
+                    return new CreatePersonCommand(commandParameters, repository);
                 case CommandType.ShowPeople:
                     throw new NotImplementedException();
                 case CommandType.ShowPersonActivity:
