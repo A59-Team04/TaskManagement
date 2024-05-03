@@ -7,8 +7,16 @@ using TaskManagement.Models.Contracts;
 
 namespace TaskManagement.Models
 {
-    internal class Task : ITask
+    public abstract class Task : ITask
     {
+        private int _id;
+        private string _title;
+        private string _description;
+
+        public Task(int id, string title, string description)
+        {
+           
+        }
         public string Title => throw new NotImplementedException();
 
         public string Description => throw new NotImplementedException();
