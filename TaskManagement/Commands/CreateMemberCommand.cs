@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using TaskManagement.Core.Contracts;
 using TaskManagement.Exceptions;
 
 namespace TaskManagement.Commands
 {
-    public class ShowPeopleCommand : BaseCommand
+    public class CreateMemberCommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 3;
-        public ShowPeopleCommand(IList<string> commandParameters, IRepository repository)
+        public const int ExpectedNumberOfArguments = 1;
+        public CreateMemberCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
         }
@@ -22,7 +23,18 @@ namespace TaskManagement.Commands
             {
                 throw new InvalidUserInputException($"Invalid number of arguments. Expected: {ExpectedNumberOfArguments}, Received: {CommandParameters.Count}");
             }
-            throw new NotImplementedException();
+            string member = CommandParameters[0];
+
+            this.Repository.ValidateMemberNameIsUnique(member);
+            // Create member
+            var person = this.Repository.CreateMember(member);
+
+            // Add person to the repository
+            this.Repository.AddMember(person);
+
+            return $"Member with name '{member}' was created!";
+
+            
         }
     }
 }

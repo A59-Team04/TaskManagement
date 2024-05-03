@@ -9,10 +9,7 @@ using System.Text.RegularExpressions;
 namespace TaskManagement.Core
 {
     public class CommandFactory : ICommandFactory
-    {
-        private const char SplitCommandSymbol = ' ';
-        private const string CommentOpenSymbol = "{{";
-        private const string CommentCloseSymbol = "}}";
+    { 
 
         private readonly IRepository repository;
 
@@ -23,16 +20,18 @@ namespace TaskManagement.Core
 
         public ICommand Create(string commandLine)
         {
-            CommandType commandType = ParseCommandType(commandLine);
-            List<string> commandParameters = this.ExtractCommandParameters(commandLine);
+            string[] arguments = commandLine.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+
+            CommandType commandType = ParseCommandType(arguments[0]);
+            List<string> commandParameters = ExtractCommandParameters(arguments);
 
             switch (commandType)
             {
                 //TO DO
-                case CommandType.CreatePerson:
-                    return new CreatePersonCommand(commandParameters, repository);
-                case CommandType.ShowPeople:
-                    throw new NotImplementedException();
+                case CommandType.CreateMember:
+                    return new CreateMemberCommand(commandParameters, repository);
+                case CommandType.ShowMembers:
+                    return new ShowMemberCommand(repository);
                 case CommandType.ShowPersonActivity:
                     throw new NotImplementedException();
                 case CommandType.CreateTeam:
@@ -56,37 +55,25 @@ namespace TaskManagement.Core
 
         // Receives a full line and extracts the command to be executed from it.
         // For example, if the input line is "FilterBy Assignee John", the method will return "FilterBy".
-        private CommandType ParseCommandType(string commandLine)
+        private static CommandType ParseCommandType(string value)
         {
-            string commandName = commandLine.Split(SplitCommandSymbol)[0];
-            Enum.TryParse(commandName, true, out CommandType result);
+            Enum.TryParse(value, true, out CommandType result);
             return result;
         }
 
         // Receives a full line and extracts the parameters that are needed for the command to execute.
         // For example, if the input line is "FilterBy Assignee John",
         // the method will return a list of ["Assignee", "John"].
-        private List<string> ExtractCommandParameters(string commandLine)
+        private static List<String> ExtractCommandParameters(string[] arguments)
         {
-            List<string> parameters = new List<string>();
+            List<string> commandParameters = new List<string>();
 
-            var indexOfOpenComment = commandLine.IndexOf(CommentOpenSymbol);
-            var indexOfCloseComment = commandLine.IndexOf(CommentCloseSymbol);
-            if (indexOfOpenComment >= 0)
+            for (int i = 1; i < arguments.Length; i++)
             {
-                var commentStartIndex = indexOfOpenComment + CommentOpenSymbol.Length;
-                var commentLength = indexOfCloseComment - CommentCloseSymbol.Length - indexOfOpenComment;
-                string commentParameter = commandLine.Substring(commentStartIndex, commentLength);
-                parameters.Add(commentParameter);
-
-                Regex regex = new Regex("{{.+(?=}})}}");
-                commandLine = regex.Replace(commandLine, string.Empty);
+                commandParameters.Add(arguments[i]);
             }
 
-            var indexOfFirstSeparator = commandLine.IndexOf(SplitCommandSymbol);
-            parameters.AddRange(commandLine.Substring(indexOfFirstSeparator + 1).Split(new[] { SplitCommandSymbol }, StringSplitOptions.RemoveEmptyEntries));
-
-            return parameters;
+            return commandParameters;
         }
     }
 }
