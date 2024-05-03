@@ -9,29 +9,30 @@ namespace TaskManagement.Core
 {
     public class Repository : IRepository
     {
-        private IList<IMember> _members = new List<IMember>(); 
+        private readonly IList<IMember> _members = new List<IMember>(); 
 
 
         public void AddMember(IMember member)
         {
-            this._members.Add(member);
+            _members.Add(member);
         }
 
         public IList<IMember> Members
         {
-            get => new List<IMember>(this._members);
+            get => new List<IMember>(_members);
         }
 
         public IList<IMember> Member => new List<IMember>(_members);
 
         public IMember CreateMember(string member)
         {
+            ValidateNameIsUnique(member, _members);
             return new Member(member);
         }
 
-        public void ValidateMemberNameIsUnique(string name)
+        private static void ValidateNameIsUnique<T>(string name, IEnumerable<T> lists) where T : INameable
         {
-            if (this._members.Any(m => m.Name == name))
+            if (lists.Any(m => m.Name == name))
             {
                 throw new EntityAlreadyExistsException($"Member with name '{name}' already exists!");
             }

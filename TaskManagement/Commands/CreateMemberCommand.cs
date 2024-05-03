@@ -25,7 +25,6 @@ namespace TaskManagement.Commands
             }
             string member = CommandParameters[0];
 
-            this.Repository.ValidateMemberNameIsUnique(member);
             // Create member
             var person = this.Repository.CreateMember(member);
 

@@ -49,7 +49,7 @@ namespace TaskManagement.Core
                 case CommandType.ShowBoardActivity:
                     throw new NotImplementedException();
                 default:
-                    throw new InvalidUserInputException($"Command with name: {commandType} doesn't exist!");
+                    throw new InvalidUserInputException($"Command with name: {arguments[0]} doesn't exist!");
             }
         }
 
@@ -57,8 +57,14 @@ namespace TaskManagement.Core
         // For example, if the input line is "FilterBy Assignee John", the method will return "FilterBy".
         private static CommandType ParseCommandType(string value)
         {
-            Enum.TryParse(value, true, out CommandType result);
-            return result;
+            if(Enum.TryParse(value, true, out CommandType result))
+            {
+                return result;
+            }
+            else
+            {
+                return CommandType.Invalid;
+            }
         }
 
         // Receives a full line and extracts the parameters that are needed for the command to execute.

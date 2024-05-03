@@ -9,6 +9,5 @@ namespace TaskManagement.Core.Contracts
         public IMember CreateMember(string member);
         public void AddMember(IMember member);
 
-        public void ValidateMemberNameIsUnique(string name);
     }
 }

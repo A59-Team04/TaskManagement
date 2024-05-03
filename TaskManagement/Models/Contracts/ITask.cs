@@ -14,11 +14,5 @@ namespace TaskManagement.Models.Contracts
 
         // Status {get; }
 
-/*        List<Bug> Bugs { get; }
-
-        List<Story> Stories {  get; }
-
-        List<Feedback> Feedbacks { get; }*/
-
     }
 }
