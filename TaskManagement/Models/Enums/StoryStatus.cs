@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TaskManagement.Models
+namespace TaskManagement.Models.Enums
 {
     public enum StoryStatus
     {

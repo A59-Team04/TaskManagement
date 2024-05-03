@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TaskManagement.Models.Contracts
+namespace TaskManagement.Models
 {
-    public interface IBugs
+    public class Story
     {
-        string Steps { get; }
-
-        
     }
 }

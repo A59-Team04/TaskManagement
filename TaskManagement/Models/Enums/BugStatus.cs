@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TaskManagement.Models.Contracts
+namespace TaskManagement.Models.Enums
 {
-    public interface IBugs
+    public enum BugStatus
     {
-        string Steps { get; }
-
-        
+        Active,
+        Fixed
     }
 }

@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TaskManagement.Models
+namespace TaskManagement.Models.Enums
 {
-    internal class BugStatus
+    public enum SeverityType
     {
+        Critical,
+        Major,
+        Minor,
     }
 }
