@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,13 +11,18 @@ namespace TaskManagement.Models
     public class Member : IMember
     {
         // Check Activity History in Border. Correct in needed.
+        public const int MinNameLenght = 5;
+        public const int MaxNameLenght = 15;
+        public const string InvalidNameError = "Name must be between 5 and 15 characters long!";
+        public const string NameIsNotUnique = "The name provided already exists!";
 
-        private const int MinNameLength = 5;
-        private const int MaxNameLength = 15;
-        private const string InvalidNameError = "Name must be between 5 and 15 characters long!";
-        private readonly IList<ITask> _tasks = new List<ITask>();
-        private readonly IList<string> _activityHistory = new List<string>();
+        private List<Task> _tasks;
+        private List<string> _activityHistory;
+        
         private string _name;
+        private readonly List<IMember> _members;
+
+        private readonly List<ActivityHistory> memberHistory = new List<ActivityHistory>();
 
         public Member(string name)
         {
@@ -33,7 +39,8 @@ namespace TaskManagement.Models
 
             set
             {
-                Validator.ValidateIntRange(value.Length, MinNameLength, MaxNameLength, InvalidNameError);
+                Validator.ValidateIntRange(value.Length, MinNameLenght, MaxNameLenght, InvalidNameError);
+                Validator.ValidateUniqueness(value, /* list of names ,*/ NameIsNotUnique);
                 _name = value;
             }
         }
@@ -47,11 +54,29 @@ namespace TaskManagement.Models
         {
             throw new NotImplementedException();
         }
-
-        public void RemoveTask(ITask task)
+        public void CreatePerson(IMember member)
         {
-            throw new NotImplementedException();
+            _members.Add(member);
+        }
+        public void AssignTask(ITask task)
+        {
+            _tasks.Add(task);
+        }
+        public void UnassignTask(ITask task)
+        {
+            _tasks.Remove(task);
+        }
+        public void ShowActivityHistory()
+        {
+
         }
 
+        public static void ShowMemberActivity()
+        {
+            foreach (BoardItem item in Items)
+            {
+                Console.WriteLine(item.ViewHistory());
+            }
+        }
     }
 }
