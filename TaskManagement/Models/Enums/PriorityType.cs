@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TaskManagement.Models
+namespace TaskManagement.Models.Enums
 {
-    public enum FeedbackStatus
+    public enum PriorityType
     {
-        New,
-        Unscheduled,
-        Scheduled,
-        Done
+        Low,
+        Medium,
+        High
     }
 }

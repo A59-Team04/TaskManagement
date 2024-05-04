@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TaskManagement.Models.Contracts
 {
-    internal interface ITeam : INameable
+    public interface ITeam : INameable
     {
         List<IMember> Members { get; }
         List<IBoard> Boards { get; }

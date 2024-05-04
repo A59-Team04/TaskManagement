@@ -16,11 +16,13 @@ namespace TaskManagement.Models
         public static int descriptionMaxLenght = 500;
         public static string descriptionLenghtError = $"The descripton must be between {descriptionMinLenght} and {descriptionMaxLenght}characters long";
 
+        private int _id;
         private string _title;
         private string _description;
 
-        public Task(string title, string description, TaskType type)
+        public Task(int id, string title, string description)
         {
+            _id = id;
             _title = title;
             _description = description;
         }
@@ -36,12 +38,10 @@ namespace TaskManagement.Models
             }
         }
 
+        public string Title => throw new NotImplementedException();
+
         public string Description => throw new NotImplementedException();
 
-        public List<Bug> Bugs => throw new NotImplementedException();
-
-        public List<Story> Stories => throw new NotImplementedException();
-
-        public List<Feedback> Feedbacks => throw new NotImplementedException();
+        public int Id => throw new NotImplementedException();
     }
 }

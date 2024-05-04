@@ -2,16 +2,17 @@
 {
     public enum CommandType
     {
-        CreatePerson,
+        CreateMember,
         CreateTeam,
-        ShowPeople,
+        ShowMembers,
         ShowPersonActivity,
         ShowTeams,
         ShowTeamActivity,
         AddPersonToTeam,
         ShowTeamMembers,
         ShowTeamBoards,
-        ShowBoardActivity
+        ShowBoardActivity,
+        Invalid
 
     }
 }

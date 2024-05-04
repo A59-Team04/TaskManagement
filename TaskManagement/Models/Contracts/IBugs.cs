@@ -3,10 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TaskManagement.Models.Enums;
 
 namespace TaskManagement.Models.Contracts
 {
-    internal interface IBugs
+    public interface IBugs
     {
+        string Steps { get; }
+
+        PriorityType Priority { get; }
+
+        SeverityType Severity { get; }
+
+        BugStatus BugStatus { get; }
     }
 }

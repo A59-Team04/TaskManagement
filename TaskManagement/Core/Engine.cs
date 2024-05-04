@@ -9,7 +9,7 @@ namespace TaskManagement.Core
     {
         private const string TerminationCommand = "Exit";
         private const string EmptyCommandError = "Command cannot be empty.";
-        private const string ReportSeparator = "####################";
+        private const string ReportSeparator = "---------------------------";
 
         private readonly ICommandFactory commandFactory;
 

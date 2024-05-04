@@ -8,17 +8,9 @@ namespace TaskManagement.Models.Contracts
 {
     public interface ITask
     {
+        int Id { get; }
         string Title { get; }
-
         string Description { get; }
-
-        // Status {get; }
-
-        List<Bug> Bugs { get; }
-
-        List<Story> Stories {  get; }
-
-        List<Feedback> Feedbacks { get; }
 
     }
 }
