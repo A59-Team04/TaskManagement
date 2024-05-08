@@ -12,12 +12,17 @@ namespace TaskManagement.Models
     {
         private int _rating;
         FeedbackStatus _status;
-        private IList<IComment> _comments = new List<IComment>();
         private IList<string> _history = new List<string>();
-        public Feedback(int id, string title, string description) : base(id, title, description)
+        public Feedback(int id, string title, string description, FeedbackStatus status) : base(id, title, description)
         {
+            Status = FeedbackStatus.New;
         }
 
-        public FeedbackStatus Status => throw new NotImplementedException();
+        public FeedbackStatus Status
+        {
+            get => _status;
+            private set => _status = value;
+        }
+
     }
 }

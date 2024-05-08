@@ -38,6 +38,10 @@ namespace TaskManagement.Models
             }
         }
 
+        public List<IMember> Members => throw new NotImplementedException();
+
+        public List<IBoard> Boards => throw new NotImplementedException();
+
         public void AddActivity(string activityDescription)
         {
             throw new NotImplementedException();

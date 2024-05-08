@@ -13,6 +13,6 @@ namespace TaskManagement.Models.Contracts
 
         StoryStatus Status { get; }
 
-       SizeType Size { get; } 
+        SizeType Size { get; } 
     }
 }

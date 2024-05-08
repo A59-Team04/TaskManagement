@@ -3,24 +3,67 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using TaskManagement.Models.Contracts;
 
 namespace TaskManagement.Models
 {
     public abstract class Task : ITask
     {
+        private const int TitleMinValue = 10;
+        private const int TitleMaxValue = 50;
+        private const int DescriptionMinValue = 10;
+        private const int DescriptionMaxValue = 500;
+        private readonly string TitleMessage = $"Title must be between {TitleMinValue} and {TitleMaxValue} symbols.";
+        private readonly string DescriptionMessage = $"Description must be between {DescriptionMinValue} and {DescriptionMaxValue} symbols.";
+
+
         private int _id;
         private string _title;
         private string _description;
+        private IList<IComment> _comment = new List<IComment>();
 
         public Task(int id, string title, string description)
         {
-           
+            Title = title;
+            Description = description;
+            _id = id;
         }
-        public string Title => throw new NotImplementedException();
+        public string Title
+        {
+            get => _title;
+            
+            set
+            {
+                Validator.ValidateIntRange(value.Length, TitleMinValue, TitleMaxValue, TitleMessage);
+                _title = value;
+            }
+        }
 
-        public string Description => throw new NotImplementedException();
+        public string Description
+        {
+            get => _description;
 
-        public int Id => throw new NotImplementedException();
+            set
+            {
+                Validator.ValidateIntRange(value.Length, DescriptionMinValue, DescriptionMaxValue, DescriptionMessage);
+                _description = value;
+            }
+        }
+        public int Id => _id;
+
+        public IList<IComment> Comment => new List<IComment>(_comment);
+
+
+        public void AddComment(IComment comment)
+        {
+            _comment.Add(comment);
+        }
+
+        public void RemoveComment(IComment comment)
+        {
+            _comment.Remove(comment);
+        }
+
     }
 }

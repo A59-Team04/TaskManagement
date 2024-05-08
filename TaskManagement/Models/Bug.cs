@@ -8,35 +8,29 @@ using TaskManagement.Models.Enums;
 
 namespace TaskManagement.Models
 {
-    public class Bug : Task, IBugs
+    public class Bug : Task, IBug
     {
 
         private IList<string> _steps = new List<string>();
         private PriorityType _priorityType;
         private SeverityType _severityType;
         private BugStatus _status;
-        private IList<ITeam> _assignee = new List<ITeam>();
-        private IList<IComment> _comment = new List<IComment>();
+        private IList<IMember> _assignee = new List<IMember>();
         private IList<string> _history = new List<string>();
 
         public Bug(int id,
                    string title,
                    string description,
-                   IList<string> steps,
                    PriorityType priorityType,
                    SeverityType severityType,
                    BugStatus status,
-                   IList<ITeam> assignee,
-                   IList<IComment> comment,
+                   IMember assignee,
                    IList<string> history)
                    : base(id, title, description)
         {
-            _steps = steps;
             _priorityType = priorityType;
             _severityType = severityType;
             _status = status;
-            _assignee = assignee;
-            _comment = comment;
             _history = history;
         }
 
