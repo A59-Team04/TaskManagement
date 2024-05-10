@@ -7,10 +7,8 @@ using TaskManagement.Models.Enums;
 
 namespace TaskManagement.Models.Contracts
 {
-    public interface IBugs
+    public interface IBug
     {
-        IList<string> Steps { get; }
-
         PriorityType Priority { get; }
 
         SeverityType Severity { get; }

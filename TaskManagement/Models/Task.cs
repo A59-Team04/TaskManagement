@@ -3,86 +3,67 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using TaskManagement.Models.Contracts;
 
 namespace TaskManagement.Models
 {
-    public class Task : ITask, ICommentable
+    public abstract class Task : ITask
     {
-        public static int titleMinLenght = 10;
-        public static int titleMaxLenght = 50;
-        public static string titcleLenghtError = $"The title must be between {titleMinLenght} and {titleMaxLenght} characters long";
-        public static int descriptionMinLenght = 10;
-        public static int descriptionMaxLenght = 500;
-        public static string descriptionLenghtError = $"The descripton must be between {descriptionMinLenght} and {descriptionMaxLenght}characters long";
+        private const int TitleMinValue = 10;
+        private const int TitleMaxValue = 50;
+        private const int DescriptionMinValue = 10;
+        private const int DescriptionMaxValue = 500;
+        private readonly string TitleMessage = $"Title must be between {TitleMinValue} and {TitleMaxValue} symbols.";
+        private readonly string DescriptionMessage = $"Description must be between {DescriptionMinValue} and {DescriptionMaxValue} symbols.";
+
 
         private int _id;
         private string _title;
         private string _description;
-        private readonly List<IComment> _comments;
-
+        private IList<IComment> _comment = new List<IComment>();
 
         public Task(int id, string title, string description)
         {
+            Title = title;
+            Description = description;
             _id = id;
-            _title = title;
-            _description = description;
-            _comments = new List<IComment>();
         }
         public string Title
         {
-            get
+            get => _title;
+            
+            set
             {
-                return _title;
-            }
-            private set
-            {
-                Validator.ValidateIntRange(value.Length, titleMinLenght, titleMaxLenght, titcleLenghtError);
+                Validator.ValidateIntRange(value.Length, TitleMinValue, TitleMaxValue, TitleMessage);
                 _title = value;
             }
         }
 
         public string Description
         {
-            get
+            get => _description;
+
+            set
             {
-                return _description;
-            }
-            private set
-            {
-                Validator.ValidateIntRange(value.Length, descriptionMinLenght, descriptionMaxLenght, descriptionLenghtError);
+                Validator.ValidateIntRange(value.Length, DescriptionMinValue, DescriptionMaxValue, DescriptionMessage);
                 _description = value;
             }
         }
+        public int Id => _id;
 
-        public int Id
-        {
-            get
-            {
-                return _id;
-            }
-            private set
-            {
-                // check uniqueness
-                _id = value;
-            }
-        }
-        public IList<IComment> Comments
-        {
-            get
-            {
-                var commentsCopy = new List<IComment>(this._comments);
-                return commentsCopy;
-            }
-        }
+        public IList<IComment> Comment => new List<IComment>(_comment);
+
+
         public void AddComment(IComment comment)
         {
-            this._comments.Add(comment);
+            _comment.Add(comment);
         }
 
         public void RemoveComment(IComment comment)
         {
-            this._comments.Remove(comment);
+            _comment.Remove(comment);
         }
+
     }
 }

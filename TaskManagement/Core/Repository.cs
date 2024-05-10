@@ -9,7 +9,7 @@ namespace TaskManagement.Core
 {
     public class Repository : IRepository
     {
-        private readonly IList<IMember> _members = new List<IMember>(); 
+        private readonly IList<IMember> _members = new List<IMember>();
 
 
         public void AddMember(IMember member)
