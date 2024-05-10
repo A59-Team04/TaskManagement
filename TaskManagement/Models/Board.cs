@@ -35,7 +35,7 @@ namespace TaskManagement.Models
             private set
             {
                 Validator.ValidateIntRange(value.Length, MinNameLenght, MaxNameLenght, InvalidNameError);
-                Validator.ValidateUniqueness(value, , NameIsNotUnique);
+                // TODO: Validator.ValidateUniqueness(value, , NameIsNotUnique);
                 _name = value;
             }
         }
@@ -56,5 +56,6 @@ namespace TaskManagement.Models
                 return new List<ActivityHistory>(_boardHistory);
             }
         }
+
     }
 }
