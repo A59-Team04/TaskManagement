@@ -23,6 +23,13 @@ namespace TaskManagement
                 throw new ArgumentException(message);
             }
         }
+        public static void ValidateUniqueness(int id, List<int> ids, string message)
+        {
+            if (ids.Contains(id))
+            {
+                throw new ArgumentException(message);
+            }
+        }
 
         //public static void ValidateName(string name, List<string> names, int nameLenght, int min, int max, string message)
         //{

@@ -12,7 +12,10 @@
         ShowTeamMembers,
         ShowTeamBoards,
         ShowBoardActivity,
+        AddComment,
+        RemoveComment,
         Invalid
+
 
     }
 }

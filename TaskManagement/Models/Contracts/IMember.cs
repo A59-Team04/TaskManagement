@@ -8,8 +8,8 @@ namespace TaskManagement.Models.Contracts
 {
      public interface IMember : INameable
     {
-        IList<ITask> Tasks { get; } 
-        IList<string> ActivityHistory { get; }  
+        List<Task> Tasks { get; } 
+        List<ActivityHistory> MemberHystory { get; }  
 
         void AddTask(ITask task);
         void RemoveTask(ITask task);

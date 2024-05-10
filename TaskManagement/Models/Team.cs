@@ -16,7 +16,7 @@ namespace TaskManagement.Models
         private string _name;
         private List<Member> _members;
         private List<Board> _board;
-        private Lazy<Team> _team;
+        private List<Team> _teams;
         private readonly List<ActivityHistory> _teamHistory = new List<ActivityHistory>();
 
 
@@ -25,11 +25,36 @@ namespace TaskManagement.Models
 
         }
 
-        public List<IMember> Members => throw new NotImplementedException();
+        public List<Member> Members
+        {
+            get
+            {
+                return _members;
+            }
+            //set with AddMember method
+        }
 
-        public List<IBoard> Boards => throw new NotImplementedException();
 
-        public string Name => throw new NotImplementedException();
+        public List<Board> Boards
+        {
+            get
+            {
+                return _board;
+            }
+            // set with AddBoard method
+        }
+
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            private set
+            {
+                _name = value;
+            }
+        }
 
         public void ShowAllMembers()
         {

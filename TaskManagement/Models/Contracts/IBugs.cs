@@ -9,7 +9,7 @@ namespace TaskManagement.Models.Contracts
 {
     public interface IBugs
     {
-        string Steps { get; }
+        IList<string> Steps { get; }
 
         PriorityType Priority { get; }
 

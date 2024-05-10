@@ -21,7 +21,7 @@ namespace TaskManagement.Commands
             this.Repository = repository;
         }
 
-        public abstract string Execute();
+        public abstract string Execute(); // Probably should be protected everywhere instead of public
 
         protected IRepository Repository { get; }
 

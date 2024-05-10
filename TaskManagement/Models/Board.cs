@@ -7,37 +7,54 @@ using TaskManagement.Models.Contracts;
 
 namespace TaskManagement.Models
 {
-    internal class Board : IBoard, INameable
+    public class Board : IBoard, INameable
     {
+        public const int MinNameLenght = 5;
+        public const int MaxNameLenght = 15;
+        public const string InvalidNameError = "Name must be between 5 and 15 characters long!";
+        public const string NameIsNotUnique = "The name provided already exists!";
 
         private string _name;
-        private List<Board> _boards;
         private List<Task> _tasks;
-        private List<ActivityHistory> _activityHistory;
+        private readonly List<ActivityHistory> _boardHistory;
 
         public Board(string name, List<Task> tasks, List<ActivityHistory> activityHistory)
         {
+            // Application.BoardNames.Add(name) Създавам нов статичен клас Appkication с лист от имена и с тази команда го запълвам
             _name = name;
             _tasks = tasks;
-            _activityHistory = activityHistory;
+            _boardHistory = activityHistory;
         }
 
         public string Name
         {
             get
             {
-                return this.make;
+                return _name;
             }
             private set
             {
-                Validator.ValidateIntRange(value.Length, MakeMinLength, MakeMaxLength, InvalidMakeError);
-                Validator.ValidateUniqueness(value, List < Task > tasks,  )
-                this.make = value;
+                Validator.ValidateIntRange(value.Length, MinNameLenght, MaxNameLenght, InvalidNameError);
+                Validator.ValidateUniqueness(value, , NameIsNotUnique);
+                _name = value;
             }
         }
 
-        public List<Task> Tasks => throw new NotImplementedException();
+        public List<Task> Tasks
+        {
+            get
+            {
+                return new List<Task>(_tasks);
+            }
+            // geter in AddTask method
+        }
 
-        public List<string> ActivityHistory => throw new NotImplementedException();
+        public List<ActivityHistory> ActivityHistory
+        {
+            get
+            {
+                return new List<ActivityHistory>(_boardHistory);
+            }
+        }
     }
 }

@@ -8,7 +8,7 @@ namespace TaskManagement.Models.Contracts
 {
     public interface ITeam : INameable
     {
-        List<IMember> Members { get; }
-        List<IBoard> Boards { get; }
+        List<Member> Members { get; }
+        List<Board> Boards { get; }
     }
 }

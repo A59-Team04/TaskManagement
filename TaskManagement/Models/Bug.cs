@@ -26,9 +26,9 @@ namespace TaskManagement.Models
                    PriorityType priorityType,
                    SeverityType severityType,
                    BugStatus status,
-                   IList<ITeam> assignee,
-                   IList<IComment> comment,
-                   IList<string> history)
+                   IList<ITeam> assignee, //how to assign
+                   IList<IComment> comment, // comment must have s string message and an author 
+                   IList<string> history) // Activity history must be implemented
                    : base(id, title, description)
         {
             _steps = steps;
@@ -40,12 +40,12 @@ namespace TaskManagement.Models
             _history = history;
         }
 
-        public string Steps => throw new NotImplementedException();
+        public IList<string> Steps => throw new NotImplementedException();
 
-        public PriorityType Priority => throw new NotImplementedException();
+        public PriorityType Priority { get; private set; }
 
-        public SeverityType Severity => throw new NotImplementedException();
+        public SeverityType Severity { get; private set; }
 
-        public BugStatus BugStatus => throw new NotImplementedException();
+        public BugStatus BugStatus { get; private set; }
     }
 }

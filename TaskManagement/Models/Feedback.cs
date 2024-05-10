@@ -14,8 +14,10 @@ namespace TaskManagement.Models
         FeedbackStatus _status;
         private IList<IComment> _comments = new List<IComment>();
         private IList<string> _history = new List<string>();
-        public Feedback(int id, string title, string description) : base(id, title, description)
+        public Feedback(int id, string title, string description, int rating, FeedbackStatus status, IList<IComment> comments, IList<string> histor) : base(id, title, description)
         {
+            
+
         }
 
         public FeedbackStatus Status => throw new NotImplementedException();

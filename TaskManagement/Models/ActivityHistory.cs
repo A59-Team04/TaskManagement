@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TaskManagement.Models
 {
-    public abstract class ActivityHistory
+    public class ActivityHistory
     {
         public ActivityHistory(string description)
         {
@@ -22,8 +22,5 @@ namespace TaskManagement.Models
         {
             return $"[{this.Time.ToString("yyyyMMdd|HH:mm:ss.ffff")}]{this.Description}";
         }
-
-        public abstract void AddActivityToHistory(string desc);
-
     }
 }
