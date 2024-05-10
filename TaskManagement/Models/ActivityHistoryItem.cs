@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TaskManagement.Models.Contracts;
 
 namespace TaskManagement.Models
 {
-    public class ActivityHistory
+    public class ActivityHistoryItem : IActivityHistoryItem
     {
-        public ActivityHistory(string description)
+        public ActivityHistoryItem(string description)
         {
             this.Description = description ?? throw new ArgumentNullException(nameof(description));
             this.Time = DateTime.Now;

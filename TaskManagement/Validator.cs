@@ -9,6 +9,9 @@ namespace TaskManagement
 {
     public static class Validator
     {
+        private static List<string> _allMemberNames = new List<string>();
+        private static List<string> _allTeamNames = new List<string>();
+
         public static void ValidateIntRange(int value, int min, int max, string message)
         {
             if (value < min || value > max)
@@ -16,26 +19,24 @@ namespace TaskManagement
                 throw new InvalidUserInputException(message);
             }
         }
-        public static void ValidateUniqueness(string name, List<string> Names, string message)
+        public static void ValidateMemberNameUniqueness(string name, string message)
         {
-            if (Names.Contains(name))
+            if (_allMemberNames.Contains(name))
             {
                 throw new ArgumentException(message);
             }
-        }
-        public static void ValidateUniqueness(int id, List<int> ids, string message)
-        {
-            if (ids.Contains(id))
-            {
-                throw new ArgumentException(message);
-            }
+
+            _allMemberNames.Add(name);
         }
 
-        //public static void ValidateName(string name, List<string> names, int nameLenght, int min, int max, string message)
-        //{
-        //    ValidateIntRange(nameLenght, min, max, message);
-        //    ValidateUniqueness(name, names, message);
-        //}
-        // PROBABLY NOT NEEDED ?
+        public static void ValidateTeamNameUniqueness(string name, string message)
+        {
+            if (_allTeamNames.Contains(name))
+            {
+                throw new ArgumentException(message);
+            }
+
+            _allTeamNames.Add(name);
+        }
     }
 }

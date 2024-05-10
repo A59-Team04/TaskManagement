@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace TaskManagement.Models.Contracts
 {
-     public interface IMember : INameable
+    public interface IMember : INameable
     {
-        List<Task> Tasks { get; } 
-        List<ActivityHistory> MemberHystory { get; }  
+        List<ActivityHistoryItem> ActivityHistory { get; }
+        void AddActivity(string description);
 
+        List<ITask> Tasks { get; }
         void AddTask(ITask task);
         void RemoveTask(ITask task);
-        void AddActivity(string activityDescription);
     }
 }

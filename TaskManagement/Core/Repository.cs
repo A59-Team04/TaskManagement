@@ -9,33 +9,45 @@ namespace TaskManagement.Core
 {
     public class Repository : IRepository
     {
-        private readonly IList<IMember> _members = new List<IMember>();
+        private readonly List<IMember> _members = new List<IMember>();
+        private readonly List<ITeam> _teams = new List<ITeam>();
 
 
-        public void AddMember(IMember member)
+        public void AddMemberToTeam(IMember member, ITeam team)
         {
-            _members.Add(member);
+            // TODO: Throw exception if member is already in the team
+
+            team.AddMember(member);
         }
 
-        public IList<IMember> Members
+        public List<IMember> Members
         {
-            get => new List<IMember>(_members);
+            get
+            {
+                return new List<IMember>(_members);
+            }
         }
-
-        public IList<IMember> Member => new List<IMember>(_members);
 
         public IMember CreateMember(string member)
         {
-            ValidateNameIsUnique(member, _members);
+            Validator.ValidateMemberNameUniqueness(member, "Member with name '{0}' already exists!");
+
             return new Member(member);
         }
 
-        private static void ValidateNameIsUnique<T>(string name, IEnumerable<T> lists) where T : INameable
+        public List<ITeam> Teams
         {
-            if (lists.Any(m => m.Name == name))
+            get
             {
-                throw new EntityAlreadyExistsException($"Member with name '{name}' already exists!");
+                return new List<ITeam>(_teams);
             }
+        }
+
+        public ITeam CreateTeam(string name)
+        {
+            Validator.ValidateTeamNameUniqueness(name, "Team with name '{0}' already exists!");
+
+            return new Team(name);
         }
     }
 }

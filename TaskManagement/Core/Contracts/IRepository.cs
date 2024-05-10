@@ -4,10 +4,16 @@ namespace TaskManagement.Core.Contracts
 {
     public interface IRepository
     {
-        IList<IMember> Members { get; }
+        List<IMember> Members { get; }
+        public IMember CreateMember(string name);
+        public void AddMemberToTeam(IMember member, ITeam team);
 
-        public IMember CreateMember(string member);
-        public void AddMember(IMember member);
+        List<ITeam> Teams { get; }
+        public ITeam CreateTeam(string name);
 
+        // TODO: Implement the same for Board
+        // List<IBoard> Boards { get; }
+        // public IBoard CreateBoard(string name);
+        // public void AddBoardToTeam(IBoard board, ITeam team);
     }
 }

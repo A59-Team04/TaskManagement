@@ -32,21 +32,24 @@ namespace TaskManagement.Commands
 
         private string AddComment(string content, string author, int taskId)
         {
-            IUser user = this.Repository.GetUser(author);
+            //IUser user = this.Repository.GetUser(author);
 
-            Validator.ValidateIntRange(
-                taskId,
-                0,
-                user.Vehicles.Count,
-                "The vehicle does not exist!");
+            //Validator.ValidateIntRange(
+            //    taskId,
+            //    0,
+            //    user.Vehicles.Count,
+            //    "The vehicle does not exist!");
 
-            IVehicle vehicle = user.Vehicles[taskId];
+            //IVehicle vehicle = user.Vehicles[taskId];
 
-            IComment comment = this.Repository.CreateComment(content, this.Repository.LoggedUser.Username);
+            //IComment comment = this.Repository.CreateComment(content, this.Repository.LoggedUser.Username);
 
-            this.Repository.LoggedUser.AddComment(comment, vehicle);
+            //this.Repository.LoggedUser.AddComment(comment, vehicle);
 
-            return $"{this.Repository.LoggedUser.Username} added comment successfully!";
+            //return $"{this.Repository.LoggedUser.Username} added comment successfully!";
+
+            // TODO: Implement AddCommentCommand
+            throw new NotImplementedException();
         }
     }
 }

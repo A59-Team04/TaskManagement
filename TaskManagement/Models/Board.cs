@@ -16,9 +16,9 @@ namespace TaskManagement.Models
 
         private string _name;
         private List<Task> _tasks;
-        private readonly List<ActivityHistory> _boardHistory;
+        private readonly List<ActivityHistoryItem> _boardHistory;
 
-        public Board(string name, List<Task> tasks, List<ActivityHistory> activityHistory)
+        public Board(string name, List<Task> tasks, List<ActivityHistoryItem> activityHistory)
         {
             // Application.BoardNames.Add(name) Създавам нов статичен клас Appkication с лист от имена и с тази команда го запълвам
             _name = name;
@@ -49,11 +49,11 @@ namespace TaskManagement.Models
             // geter in AddTask method
         }
 
-        public List<ActivityHistory> ActivityHistory
+        public List<ActivityHistoryItem> ActivityHistory
         {
             get
             {
-                return new List<ActivityHistory>(_boardHistory);
+                return new List<ActivityHistoryItem>(_boardHistory);
             }
         }
 

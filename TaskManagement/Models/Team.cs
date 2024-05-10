@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using TaskManagement.Models.Contracts;
 
 namespace TaskManagement.Models
@@ -14,34 +15,14 @@ namespace TaskManagement.Models
         public const string InvalidNameError = "Name must be between 5 and 15 characters long!";
 
         private string _name;
-        private List<Member> _members;
-        private List<Board> _board;
-        private List<Team> _teams;
-        private readonly List<ActivityHistory> _teamHistory = new List<ActivityHistory>();
+        private List<Member> _members = new List<Member>();
+        private List<Board> _board = new List<Board>();
+        private readonly List<ActivityHistoryItem> _activityHistory = new List<ActivityHistoryItem>();
 
 
-        public Team(string name, List<Member> members, List<Board> board)
+        public Team(string name)
         {
 
-        }
-
-        public List<Member> Members
-        {
-            get
-            {
-                return _members;
-            }
-            //set with AddMember method
-        }
-
-
-        public List<Board> Boards
-        {
-            get
-            {
-                return _board;
-            }
-            // set with AddBoard method
         }
 
         public string Name
@@ -50,36 +31,58 @@ namespace TaskManagement.Models
             {
                 return _name;
             }
-            private set
+        }
+
+        public List<IMember> Members
+        {
+            get
             {
-                _name = value;
+                return new List<IMember>(_members);
             }
         }
 
         public void ShowAllMembers()
         {
-            foreach (Team in Teams)
+            Console.WriteLine($"{this.Name}:");
+
+            foreach (var member in _members)
             {
-                Console.WriteLine($"{Team.Name}:");
-                foreach (var member in _members)
-                {
-                    Console.WriteLine(member.Name);
-                }
+                Console.WriteLine(member.Name);
             }
 
         }
 
-        public static void ViewTeamHistory()
+        public string ShowActivityHistory()
         {
-            foreach (Team team in _team)
-            {
-                Console.WriteLine(item.ViewHistory());
-            }
+            return string.Join(Environment.NewLine, _activityHistory.Select(e => e.ViewInfo())); // better check again
         }
 
-        public override void AddActivityToHistory(string desc)
+        public void AddActivity(string description)
         {
-            this.teamHistory.Add(new ActivityHistory(desc));
+            _activityHistory.Add(new ActivityHistoryItem(description));
+        }
+
+
+        public void AddMember(IMember member)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveMember(IMember member)
+        {
+            throw new NotImplementedException();
+        }
+
+        List<IBoard> ITeam.Boards { get; }
+
+        public void AddBoard(IBoard board)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveBoard(IBoard board)
+        {
+            throw new NotImplementedException();
         }
     }
 }
