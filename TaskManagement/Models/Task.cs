@@ -18,10 +18,10 @@ namespace TaskManagement.Models
         private readonly string DescriptionMessage = $"Description must be between {DescriptionMinValue} and {DescriptionMaxValue} symbols.";
 
 
-        private int _id;
+        private readonly int _id;
         private string _title;
         private string _description;
-        private IList<IComment> _comment = new List<IComment>();
+
 
         public Task(int id, string title, string description)
         {
@@ -31,8 +31,11 @@ namespace TaskManagement.Models
         }
         public string Title
         {
-            get => _title;
-            
+            get
+            {
+                return _title;
+            }
+
             set
             {
                 Validator.ValidateIntRange(value.Length, TitleMinValue, TitleMaxValue, TitleMessage);
@@ -42,7 +45,10 @@ namespace TaskManagement.Models
 
         public string Description
         {
-            get => _description;
+            get
+            {
+                return _description;
+            }
 
             set
             {
@@ -50,20 +56,23 @@ namespace TaskManagement.Models
                 _description = value;
             }
         }
-        public int Id => _id;
-
-        public IList<IComment> Comment => new List<IComment>(_comment);
-
-
-        public void AddComment(IComment comment)
+        public int Id
         {
-            _comment.Add(comment);
+            get
+            {
+                return _id;
+            }
         }
 
-        public void RemoveComment(IComment comment)
+        public abstract void AddComment(IComment comment);
+        public abstract void RemoveComment(IComment comment);
+
+        static protected void AddActivityHistoryItem(string description, List<IActivityHistoryItem> activityHistory)
         {
-            _comment.Remove(comment);
+            var activity = new ActivityHistoryItem(description);
+            activityHistory.Add(activity);
         }
+
 
     }
 }
