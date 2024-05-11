@@ -2,6 +2,6 @@
 {
     public interface ICommand
     {
-       protected string Execute();
+        string Execute();
     }
 }
