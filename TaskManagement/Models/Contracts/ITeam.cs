@@ -9,5 +9,7 @@
         List<IBoard> Boards { get; }
         void AddBoard(IBoard board);
         void RemoveBoard(IBoard board);
+
+        void AddActivity(string description);
     }
 }

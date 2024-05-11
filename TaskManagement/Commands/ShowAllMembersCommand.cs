@@ -9,25 +9,29 @@ using TaskManagement.Models.Contracts;
 
 namespace TaskManagement.Commands
 {
-    public class CreateTeamCommand : BaseCommand
+    public class ShowAllMembersCommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 1;
-        public CreateTeamCommand(IList<string> commandParameters, IRepository repository)
+        public const int ExpectedNumberOfArguments = 0;
+        public ShowAllMembersCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
         }
 
         public override string Execute()
         {
-
             if (CommandParameters.Count != ExpectedNumberOfArguments)
             {
                 throw new InvalidUserInputException($"Invalid number of arguments. Expected: {ExpectedNumberOfArguments}, Received: {CommandParameters.Count}");
             }
-            string name = CommandParameters[0];
-            ITeam team = this.Repository.CreateTeam(name);
-            team.AddActivity($"New team with name {name} was created.");
-            return $"New team with name {name} was created.";
+
+;           string personName = this.CommandParameters[0];
+
+            return this.ShowMembers();
+        }
+        private string ShowMembers()
+        {
+            List<IMember> members = this.Repository.Members;
+            return "finish"; // members.ShowAllPeople();
         }
     }
 }

@@ -8,28 +8,35 @@ using TaskManagement.Models.Contracts;
 
 namespace TaskManagement.Models
 {
-    internal class Team : ITeam
+    public class Team : ITeam
     {
         public const int MinNameLenght = 5;
         public const int MaxNameLenght = 15;
         public const string InvalidNameError = "Name must be between 5 and 15 characters long!";
+        public const string NameIsNotUnique = "Team name is not unique.";
 
         private string _name;
-        private List<Member> _members = new List<Member>();
-        private List<Board> _board = new List<Board>();
+        private List<IMember> _members = new List<IMember>();
+        private List<IBoard> _boards = new List<IBoard>();
         private readonly List<ActivityHistoryItem> _activityHistory = new List<ActivityHistoryItem>();
+        private List<Team> _teams = new List<Team>();
 
 
         public Team(string name)
         {
-
+            this.Name = name;
         }
 
         public string Name
         {
-            get
+            get => _name;
+
+            set
             {
-                return _name;
+                Validator.ValidateIntRange(value.Length, MinNameLenght, MaxNameLenght, InvalidNameError);
+                Validator.ValidateTeamNameUniqueness(value, NameIsNotUnique);
+
+                _name = value;
             }
         }
 
@@ -39,6 +46,11 @@ namespace TaskManagement.Models
             {
                 return new List<IMember>(_members);
             }
+        }
+
+        public bool IsBoardNameUnique(string boardName)
+        {
+            return !_boards.Any(board => board.Name == boardName);
         }
 
         public void ShowAllMembers()
@@ -73,7 +85,13 @@ namespace TaskManagement.Models
             throw new NotImplementedException();
         }
 
-        List<IBoard> ITeam.Boards { get; }
+        public List<IBoard> Boards
+        {
+            get
+            {
+                return new List<IBoard>(_boards);
+            }
+        }
 
         public void AddBoard(IBoard board)
         {

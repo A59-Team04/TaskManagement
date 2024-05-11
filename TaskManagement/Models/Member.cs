@@ -53,6 +53,10 @@ namespace TaskManagement.Models
             }
         }
 
+        public void CreateNewPerson()
+        {
+
+        }
         public void AddActivity(string description)
         {
             throw new NotImplementedException();

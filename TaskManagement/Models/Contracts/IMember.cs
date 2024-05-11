@@ -14,5 +14,6 @@ namespace TaskManagement.Models.Contracts
         List<ITask> Tasks { get; }
         void AddTask(ITask task);
         void RemoveTask(ITask task);
+        string ShowActivityHistory();
     }
 }

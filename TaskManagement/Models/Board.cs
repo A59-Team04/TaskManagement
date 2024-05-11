@@ -12,7 +12,7 @@ namespace TaskManagement.Models
         public const int MinNameLenght = 5;
         public const int MaxNameLenght = 15;
         public const string InvalidNameError = "Name must be between 5 and 15 characters long!";
-        public const string NameIsNotUnique = "The name provided already exists!";
+        public const string NameIsNotUnique = "The board name provided already exists!";
 
         private string _name;
         private List<Task> _tasks;
@@ -20,7 +20,6 @@ namespace TaskManagement.Models
 
         public Board(string name, List<Task> tasks, List<ActivityHistoryItem> activityHistory)
         {
-            // Application.BoardNames.Add(name) Създавам нов статичен клас Appkication с лист от имена и с тази команда го запълвам
             _name = name;
             _tasks = tasks;
             _boardHistory = activityHistory;
@@ -35,18 +34,22 @@ namespace TaskManagement.Models
             private set
             {
                 Validator.ValidateIntRange(value.Length, MinNameLenght, MaxNameLenght, InvalidNameError);
-                // TODO: Validator.ValidateUniqueness(value, , NameIsNotUnique);
+                //this.Team.IsBoardNameUnique(value); // TO DO
                 _name = value;
             }
         }
 
+        //private bool IsBoardNameUnique(string boardName)
+        //{
+        //    // Check if the board name already exists in the team's boards
+        //    return !Team.Instance.Boards.Any(board => board.Name == boardName);
+        //}
         public List<Task> Tasks
         {
             get
             {
                 return new List<Task>(_tasks);
             }
-            // geter in AddTask method
         }
 
         public List<ActivityHistoryItem> ActivityHistory

@@ -4,6 +4,7 @@ using TaskManagement.Models;
 using TaskManagement.Models.Contracts;
 using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace TaskManagement.Core
 {
@@ -27,6 +28,15 @@ namespace TaskManagement.Core
                 return new List<IMember>(_members);
             }
         }
+        public IMember GetMember(string memberName)
+        {
+            IMember member = _members.FirstOrDefault(u => u.Name.Equals(memberName, StringComparison.InvariantCultureIgnoreCase));
+            if (member != null)
+            {
+                return member;
+            }
+            throw new EntityNotFoundException($"There is no user with username {memberName}!");
+        }
 
         public IMember CreateMember(string member)
         {
@@ -34,6 +44,12 @@ namespace TaskManagement.Core
 
             return new Member(member);
         }
+
+        public string ShowAllPeople()
+        {
+            return string.Join(", ", _members.Select(member => member.Name));
+        }
+
 
         public List<ITeam> Teams
         {
@@ -46,8 +62,14 @@ namespace TaskManagement.Core
         public ITeam CreateTeam(string name)
         {
             Validator.ValidateTeamNameUniqueness(name, "Team with name '{0}' already exists!");
-
+            //this.Teams.AddActivity($"New team with name {name} was created.");
             return new Team(name);
         }
+
+        public string ShowAllTeams()
+        {
+            return string.Join(", ", _teams.Select(team => team.Name));
+        }
+
     }
 }

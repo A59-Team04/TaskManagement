@@ -10,6 +10,7 @@ namespace TaskManagement.Core.Contracts
 
         List<ITeam> Teams { get; }
         public ITeam CreateTeam(string name);
+        IMember GetMember(string personName);
 
         // TODO: Implement the same for Board
         // List<IBoard> Boards { get; }

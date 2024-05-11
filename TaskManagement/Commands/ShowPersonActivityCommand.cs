@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using TaskManagement.Core.Contracts;
 using TaskManagement.Exceptions;
+using TaskManagement.Models.Contracts;
 
 namespace TaskManagement.Commands
 {
     public class ShowPersonActivity : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 3;
+        public const int ExpectedNumberOfArguments = 1;
         public ShowPersonActivity(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
@@ -22,7 +23,15 @@ namespace TaskManagement.Commands
             {
                 throw new InvalidUserInputException($"Invalid number of arguments. Expected: {ExpectedNumberOfArguments}, Received: {CommandParameters.Count}");
             }
-            throw new NotImplementedException();
+            
+;           string personName = this.CommandParameters[0];
+
+            return this.ShowMemberHistory(personName);
+        }
+        private string ShowMemberHistory(string personName)
+        {
+            IMember member = this.Repository.GetMember(personName);
+            return member.ShowActivityHistory();
         }
     }
 }
