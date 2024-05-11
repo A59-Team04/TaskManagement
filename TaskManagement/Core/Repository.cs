@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
+using System.Diagnostics.Metrics;
 
 namespace TaskManagement.Core
 {
@@ -41,6 +42,16 @@ namespace TaskManagement.Core
                 return member;
             }
             throw new EntityNotFoundException($"There is no user with username {memberName}!");
+        }
+
+        public ITeam GetTeam(string teamName)
+        {
+            ITeam team = _teams.FirstOrDefault(u => u.Name.Equals(teamName, StringComparison.InvariantCultureIgnoreCase));
+            if (team != null)
+            {
+                return team;
+            }
+            throw new EntityNotFoundException($"There is no team with name {team}!");
         }
 
         public IMember CreateMember(string member)

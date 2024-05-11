@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TaskManagement.Core.Contracts;
 using TaskManagement.Exceptions;
+using TaskManagement.Models.Contracts;
 
 namespace TaskManagement.Commands
 {
@@ -21,7 +22,15 @@ namespace TaskManagement.Commands
             {
                 throw new InvalidUserInputException($"Invalid number of arguments. Expected: {ExpectedNumberOfArguments}, Received: {CommandParameters.Count}");
             }
-            throw new NotImplementedException();
+
+            string teamName = this.CommandParameters[0];
+
+            return this.ShowMemberHistory(teamName);
+        }
+        private string ShowMemberHistory(string teamName)
+        {
+            IMember member = this.Repository.GetMember(teamName);
+            return member.ShowActivityHistory();
         }
     }
 }
