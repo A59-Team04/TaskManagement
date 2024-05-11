@@ -18,10 +18,9 @@ namespace TaskManagement.Models
         private readonly List<ITask> _tasks = new List<ITask>();
         private readonly List<IActivityHistoryItem> _boardHistory = new List<IActivityHistoryItem>();
         private ITeam _team;
-        public Board(string name, ITeam team)
+        public Board(string name)
         {
             _name = name;
-            Team = team;
         }
 
         public string Name
@@ -83,5 +82,9 @@ namespace TaskManagement.Models
             activityHistory.Add(activity);
         }
 
+        public override string ToString()
+        {
+            return $" - {this.Name}"; 
+        }
     }
  }

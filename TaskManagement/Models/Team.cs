@@ -8,12 +8,12 @@ using TaskManagement.Models.Contracts;
 
 namespace TaskManagement.Models
 {
-    public class Team : ITeam
+    public class Team : ITeam, INameable
     {
         public const int MinNameLength = 5;
         public const int MaxNameLength = 15;
         public const string InvalidNameError = "Name must be between 5 and 15 characters long!";
-        public const string NameIsNotUnique = "Team name is not unique.";
+        public const string NameIsNotUnique = "Team name already exists!";
 
         private string _name;
         private readonly List<IMember> _members = new List<IMember>();
@@ -107,6 +107,26 @@ namespace TaskManagement.Models
         public void RemoveBoard(IBoard board)
         {
             _boards.Remove(board);
+        }
+
+        public string PrintTeamBoards()
+        {
+            StringBuilder result = new StringBuilder();
+            result.AppendLine($"--Team: {Name}--");
+            if (_boards.Count == 0)
+            {
+                result.AppendLine($"No boards in Team: {Name}");
+                return result.ToString();
+            }
+
+            int boardCount = 1;
+
+            foreach (var board in _boards)
+            {
+                result.Append(boardCount++);
+                result.AppendLine(board.ToString());
+            }
+            return result.ToString();
         }
     }
 }

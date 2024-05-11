@@ -28,6 +28,8 @@ namespace TaskManagement.Commands
             // Create member
             var person = this.Repository.CreateMember(member);
 
+            Repository.AddMember(person);
+
             return $"Member with name '{member}' was created!";
 
             

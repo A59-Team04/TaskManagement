@@ -11,7 +11,7 @@ namespace TaskManagement.Commands
 {
     public class ShowTeamActivityCommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 3;
+        public const int ExpectedNumberOfArguments = 1;
         public ShowTeamActivityCommand(IList<string> commandParameters, IRepository repository) 
             : base(commandParameters, repository) 
         { 

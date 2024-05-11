@@ -26,6 +26,7 @@ namespace TaskManagement.Commands
             }
             string name = CommandParameters[0];
             ITeam team = this.Repository.CreateTeam(name);
+            Repository.AddTeam(team);
             team.AddActivity($"New team with name {name} was created.");
             return $"New team with name {name} was created.";
         }

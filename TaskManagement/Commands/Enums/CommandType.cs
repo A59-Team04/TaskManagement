@@ -14,6 +14,7 @@
         ShowBoardActivity,
         AddComment,
         RemoveComment,
+        CreateBoard,
         Invalid
 
 

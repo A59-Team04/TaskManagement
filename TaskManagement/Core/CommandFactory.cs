@@ -39,9 +39,9 @@ namespace TaskManagement.Core
                 case CommandType.ShowPersonActivity:
                     throw new NotImplementedException();
                 case CommandType.CreateTeam:
-                    throw new NotImplementedException();
+                    return new CreateTeamCommand(commandParameters, repository);
                 case CommandType.ShowTeams:
-                    throw new NotImplementedException();
+                    return new ShowTeamsCommand(repository);
                 case CommandType.ShowTeamActivity:
                     throw new NotImplementedException();
                 case CommandType.AddPersonToTeam:
@@ -49,9 +49,11 @@ namespace TaskManagement.Core
                 case CommandType.ShowTeamMembers:
                     throw new NotImplementedException();
                 case CommandType.ShowTeamBoards:
-                    throw new NotImplementedException();                
+                    return new ShowTeamBoardsCommand(commandParameters, repository);                
                 case CommandType.ShowBoardActivity:
                     throw new NotImplementedException();
+                case CommandType.CreateBoard:
+                    return new CreateBoardCommand(commandParameters, repository);
                 default:
                     throw new InvalidUserInputException($"Command with name: {arguments[0]} doesn't exist!");
             }

@@ -44,12 +44,12 @@ namespace TaskManagement
         }        
         public static void ValidateBoardNameUniqueness(string name, string message)
         {
-            if (_allTeamNames.Contains(name))
+            if (_allBoardNames.Contains(name))
             {
                 throw new ArgumentException(message);
             }
 
-            _allTeamNames.Add(name);
+            _allBoardNames.Add(name);
         }
 
     }
