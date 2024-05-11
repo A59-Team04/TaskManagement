@@ -12,17 +12,62 @@ namespace TaskManagement.Models
     {
         private int _rating;
         FeedbackStatus _status;
-        private IList<string> _history = new List<string>();
-        public Feedback(int id, string title, string description, FeedbackStatus status) : base(id, title, description)
+        private readonly List<IComment> _comment = new List<IComment>();
+        private readonly List<IActivityHistoryItem> _activityHistory = new List<IActivityHistoryItem>();
+
+        public Feedback(int id, int rating, string title, string description, FeedbackStatus status = FeedbackStatus.New) : base(id, title, description)
         {
-            Status = FeedbackStatus.New;
+            Status = status;
+            Rating = rating;
         }
 
         public FeedbackStatus Status
         {
-            get => _status;
-            private set => _status = value;
+            get
+            {
+                return _status;
+            }
+            set
+            {
+                _status = value;
+            }
         }
 
+        public int Rating
+        {
+            get
+            {
+                return _rating;
+            }
+            set
+            {
+                Validator.ValidateIntRange(value, 1, 5, "Rating must be between 1-5");
+                _rating = value;
+            }
+        }
+
+        public void ChangeRating (int newRating)
+        {
+            Rating = newRating;
+            AddActivityHistoryItem($"Rating changed to {newRating}", _activityHistory);
+        }
+
+        public void ChangeStatus (FeedbackStatus newStatus)
+        {
+            Status = newStatus;
+            AddActivityHistoryItem($"Status changed to {newStatus}", _activityHistory);
+        }
+
+        public override void AddComment(IComment comment)
+        {
+            _comment.Add(comment);
+            AddActivityHistoryItem($"Comment added to Feedback", _activityHistory);
+        }
+
+        public override void RemoveComment(IComment comment)
+        {
+            _comment.Remove(comment);
+            AddActivityHistoryItem($"Comment removed from Feedback", _activityHistory);
+        }
     }
 }

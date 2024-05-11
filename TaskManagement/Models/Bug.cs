@@ -11,35 +11,130 @@ namespace TaskManagement.Models
     public class Bug : Task, IBug
     {
 
-        private IList<string> _steps = new List<string>();
-        private PriorityType _priorityType;
-        private SeverityType _severityType;
+        private readonly List<string> _steps = new List<string>();
+        private PriorityType _priority;
+        private SeverityType _severity;
         private BugStatus _status;
-        private IList<IMember> _assignee = new List<IMember>();
-        private IList<string> _history = new List<string>();
-
+        private IMember _assignee;
+        private readonly List<IComment> _comment = new List<IComment>();
+        private readonly List<IActivityHistoryItem> _activityHistory = new List<IActivityHistoryItem>();
         public Bug(int id,
                    string title,
                    string description,
                    PriorityType priorityType,
                    SeverityType severityType,
                    BugStatus status,
-                   IMember assignee,
-                   IList<string> history)
+                   IMember assignee)
                    : base(id, title, description)
         {
-            _priorityType = priorityType;
-            _severityType = severityType;
-            _status = status;
-            _history = history;
+            Priority = priorityType;
+            Severity = severityType;
+            BugStatus = status;
+            Assignee = assignee;
         }
 
-        public string Steps => throw new NotImplementedException();
+        public List<string> Steps
+        {
+            get
+            {
+                return new List<string>(_steps);
+            }
+        }
 
-        public PriorityType Priority => throw new NotImplementedException();
+        public PriorityType Priority
+        {
+            get
+            {
+                return _priority;
+            }
+            set
+            {
+                _priority = value;
+            }
+        }
 
-        public SeverityType Severity => throw new NotImplementedException();
 
-        public BugStatus BugStatus => throw new NotImplementedException();
+        public SeverityType Severity
+        {
+            get
+            {
+                return _severity;
+            }
+            set
+            {
+                _severity = value;
+            }
+        }
+
+        public BugStatus BugStatus
+        {
+            get
+            {
+                return _status;
+            }
+            set
+            {
+                _status = value;
+            }
+        }
+
+        public IMember Assignee
+        {
+            get
+            {
+                return _assignee;
+            }
+            set
+            {
+                _assignee = value;
+            }
+        }
+        public List<IComment> Comments
+        {
+            get
+            {
+                return new List<IComment>(_comment);
+            }
+        }
+
+        public List<IActivityHistoryItem> ActivityHistories
+        {
+            get
+            {
+                return new List<IActivityHistoryItem>(_activityHistory);
+            }
+        }
+
+        public void ChangePriority(PriorityType priority)
+        {
+            Priority = priority;
+            AddActivityHistoryItem($"Priority changed to {priority}", _activityHistory);
+        }
+
+        public void ChangeSeverity(SeverityType severity)
+        {
+            Severity = severity;
+            AddActivityHistoryItem($"Severity changed to {severity}", _activityHistory);
+        }
+
+        public void ChangeStatus(BugStatus status)
+        {
+            BugStatus = status;
+            AddActivityHistoryItem($"Status changed to {status}", _activityHistory);
+        }
+
+        public override void AddComment(IComment comment)
+        {
+            _comment.Add(comment);
+            AddActivityHistoryItem($"Comment added to Story", _activityHistory);
+        }
+
+        public override void RemoveComment(IComment comment)
+        {
+            _comment.Remove(comment);
+            AddActivityHistoryItem($"Comment removed from Story", _activityHistory);
+        }
+
+        
     }
 }
