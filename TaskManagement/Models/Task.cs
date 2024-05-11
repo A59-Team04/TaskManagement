@@ -67,7 +67,7 @@ namespace TaskManagement.Models
         public abstract void AddComment(IComment comment);
         public abstract void RemoveComment(IComment comment);
 
-        static protected void AddActivityHistoryItem(string description, List<IActivityHistoryItem> activityHistory)
+        static protected void AddActivityHistory(string description, List<IActivityHistoryItem> activityHistory)
         {
             var activity = new ActivityHistoryItem(description);
             activityHistory.Add(activity);

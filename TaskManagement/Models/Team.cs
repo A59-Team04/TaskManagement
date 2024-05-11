@@ -19,8 +19,6 @@ namespace TaskManagement.Models
         private List<IMember> _members = new List<IMember>();
         private List<IBoard> _boards = new List<IBoard>();
         private readonly List<ActivityHistoryItem> _activityHistory = new List<ActivityHistoryItem>();
-        private List<Team> _teams = new List<Team>();
-
 
         public Team(string name)
         {

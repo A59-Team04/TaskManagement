@@ -8,7 +8,7 @@ namespace TaskManagement.Models.Contracts
 {
     public interface IBoard : INameable
     {
-        List<Task> Tasks { get; }
-        // TODO: List<string> ActivityHistory { get; }
+        List<ITask> Tasks { get; }
+        List<IActivityHistoryItem> ActivityHistory { get; }
     }
 }
