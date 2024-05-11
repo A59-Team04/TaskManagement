@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using TaskManagement.Exceptions;
 using TaskManagement.Models.Contracts;
 
 namespace TaskManagement.Models
 {
     public class Team : ITeam
     {
-        public const int MinNameLenght = 5;
-        public const int MaxNameLenght = 15;
+        public const int MinNameLength = 5;
+        public const int MaxNameLength = 15;
         public const string InvalidNameError = "Name must be between 5 and 15 characters long!";
         public const string NameIsNotUnique = "Team name is not unique.";
 
         private string _name;
-        private List<IMember> _members = new List<IMember>();
-        private List<IBoard> _boards = new List<IBoard>();
+        private readonly List<IMember> _members = new List<IMember>();
+        private readonly List<IBoard> _boards = new List<IBoard>();
         private readonly List<ActivityHistoryItem> _activityHistory = new List<ActivityHistoryItem>();
 
         public Team(string name)
@@ -31,7 +31,7 @@ namespace TaskManagement.Models
 
             set
             {
-                Validator.ValidateIntRange(value.Length, MinNameLenght, MaxNameLenght, InvalidNameError);
+                Validator.ValidateIntRange(value.Length, MinNameLength, MaxNameLength, InvalidNameError);
                 Validator.ValidateTeamNameUniqueness(value, NameIsNotUnique);
 
                 _name = value;
@@ -75,12 +75,16 @@ namespace TaskManagement.Models
 
         public void AddMember(IMember member)
         {
-            throw new NotImplementedException();
+            if (_members.Contains(member))
+            {
+                throw new EntityAlreadyExistsException($"Member with already exists!");
+            }
+            _members.Add(member);
         }
 
         public void RemoveMember(IMember member)
-        {
-            throw new NotImplementedException();
+        { 
+            _members.Remove(member);
         }
 
         public List<IBoard> Boards
@@ -93,12 +97,16 @@ namespace TaskManagement.Models
 
         public void AddBoard(IBoard board)
         {
-            throw new NotImplementedException();
+            if (_boards.Contains(board))
+            {
+                throw new EntityAlreadyExistsException("Board already exists!");
+            }
+            _boards.Add(board); 
         }
 
         public void RemoveBoard(IBoard board)
         {
-            throw new NotImplementedException();
+            _boards.Remove(board);
         }
     }
 }

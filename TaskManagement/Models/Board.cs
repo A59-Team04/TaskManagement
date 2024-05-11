@@ -77,10 +77,10 @@ namespace TaskManagement.Models
             _tasks.Remove(task);
             AddActivityHistory($"Task: {task} removed from board.", _boardHistory);
         }
-        private void AddActivityHistory(string description, List<IActivityHistoryItem> activityHistories)
+        private void AddActivityHistory(string description, List<IActivityHistoryItem> activityHistory)
         {
             var activity = new ActivityHistoryItem(description);
-            activityHistories.Add(activity);
+            activityHistory.Add(activity);
         }
 
     }
