@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -79,11 +80,14 @@ namespace TaskManagement.Models
             {
                 throw new EntityAlreadyExistsException($"Member with already exists!");
             }
+            AddActivity($"Member '{member}' added to Team: {Name}");
             _members.Add(member);
+            
         }
 
         public void RemoveMember(IMember member)
-        { 
+        {
+            AddActivity($"Member '{member}' removed from Team: {Name}");
             _members.Remove(member);
         }
 
@@ -101,11 +105,13 @@ namespace TaskManagement.Models
             {
                 throw new EntityAlreadyExistsException("Board already exists!");
             }
+            AddActivity($"Board '{board}' added to Team: {Name}");
             _boards.Add(board); 
         }
 
         public void RemoveBoard(IBoard board)
         {
+            AddActivity($"Board '{board}' removed from Team: {Name}");
             _boards.Remove(board);
         }
 
@@ -128,5 +134,6 @@ namespace TaskManagement.Models
             }
             return result.ToString();
         }
+
     }
 }

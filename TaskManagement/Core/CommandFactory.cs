@@ -43,7 +43,7 @@ namespace TaskManagement.Core
                 case CommandType.ShowTeams:
                     return new ShowTeamsCommand(repository);
                 case CommandType.ShowTeamActivity:
-                    throw new NotImplementedException();
+                    return new ShowTeamActivityCommand(commandParameters, repository);
                 case CommandType.AddPersonToTeam:
                     throw new NotImplementedException();
                 case CommandType.ShowTeamMembers:

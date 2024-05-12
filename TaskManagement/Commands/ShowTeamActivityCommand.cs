@@ -29,8 +29,8 @@ namespace TaskManagement.Commands
         }
         private string ShowMemberHistory(string teamName)
         {
-            IMember member = this.Repository.GetMember(teamName);
-            return member.ShowActivityHistory();
+            ITeam team = this.Repository.GetTeam(teamName);
+            return team.ShowActivityHistory();
         }
     }
 }

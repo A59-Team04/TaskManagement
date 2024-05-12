@@ -12,6 +12,7 @@
 
         void AddActivity(string description);
 
+        string ShowActivityHistory();
         string PrintTeamBoards();
     }
 }
