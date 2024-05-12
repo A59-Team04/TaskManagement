@@ -76,5 +76,10 @@ namespace TaskManagement.Models
         {
             return string.Join(Environment.NewLine, _activityHistory.Select(e => e.ViewInfo())); // better check again
         }
+
+        public override string ToString()
+        {
+            return $"{Name}";
+        }
     }
 }

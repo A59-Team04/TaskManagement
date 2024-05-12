@@ -119,6 +119,7 @@ namespace TaskManagement.Models
         {
             StringBuilder result = new StringBuilder();
             result.AppendLine($"--Team: {Name}--");
+            result.AppendLine("    Boards:");
             if (_boards.Count == 0)
             {
                 result.AppendLine($"No boards in Team: {Name}");
@@ -129,9 +130,33 @@ namespace TaskManagement.Models
 
             foreach (var board in _boards)
             {
-                result.Append(boardCount++);
+                result.Append($"      {boardCount++}. ");
                 result.AppendLine(board.ToString());
             }
+            return result.ToString();
+        }
+
+        public string PrintTeamMembers()
+        {
+
+            StringBuilder result = new StringBuilder();
+            result.AppendLine($"--Team: {Name}--");
+            result.AppendLine("    Members:");
+
+            if (_members.Count == 0)
+            {
+                result.AppendLine($"No members in Team: {Name}");
+                return result.ToString();
+            }
+
+            int membersCount = 1;
+
+            foreach (var member in _members)
+            {
+                result.Append($"      {membersCount++}. ");
+                result.AppendLine(member.ToString());
+            }
+
             return result.ToString();
         }
 

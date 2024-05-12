@@ -14,5 +14,6 @@
 
         string ShowActivityHistory();
         string PrintTeamBoards();
+        string PrintTeamMembers();
     }
 }
