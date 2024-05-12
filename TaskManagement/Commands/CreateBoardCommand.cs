@@ -29,16 +29,10 @@ namespace TaskManagement.Commands
             string boardName = CommandParameters[0];
             string teamName = CommandParameters[1];
 
-            // Get the team
             ITeam team = Repository.GetTeam(teamName);
-
-            // Create the board (assuming board name uniqueness is validated in Board constructor)
             IBoard board = new Board(boardName);
 
-            // Add the board to the repository
             Repository.AddBoard(board);
-
-            // You might want to add the board to the team here as well
             team.AddBoard(board);
 
             return $"Board '{boardName}' created in team '{teamName}' successfully!";
