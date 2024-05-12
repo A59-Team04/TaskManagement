@@ -30,7 +30,7 @@ namespace TaskManagement.Commands
             string teamName = CommandParameters[1];
 
             ITeam team = Repository.GetTeam(teamName);
-            IBoard board = new Board(boardName);
+            IBoard board = Repository.CreateBoard(boardName);
 
             Repository.AddBoard(board);
             team.AddBoard(board);

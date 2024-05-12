@@ -6,13 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using TaskManagement.Core.Contracts;
 using TaskManagement.Exceptions;
+using TaskManagement.Models.Contracts;
 
 namespace TaskManagement.Commands
 {
-    public class AddPersonToTeamCommand : BaseCommand
+    public class AddMemberToTeamCommand : BaseCommand
     {
         public const int ExpectedNumberOfArguments = 2;
-        public AddPersonToTeamCommand(IList<string> commandParameters, IRepository repository)
+        public AddMemberToTeamCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
         }
@@ -22,7 +23,16 @@ namespace TaskManagement.Commands
             {
                 throw new InvalidUserInputException($"Invalid number of arguments. Expected: {ExpectedNumberOfArguments}, Received: {CommandParameters.Count}");
             }
-            throw new NotImplementedException();
+            
+            string memberName = CommandParameters[0];
+            string teamName = CommandParameters[1];
+
+            IMember member = Repository.GetMember(memberName);
+            ITeam team = Repository.GetTeam(teamName);
+            
+            team.AddMember(member);
+
+            return $"Member '{memberName}' added to team '{teamName}' successfully";
         }
     }
 }

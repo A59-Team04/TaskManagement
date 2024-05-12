@@ -36,7 +36,7 @@ namespace TaskManagement.Core
                     return new AddCommentCommand(commandParameters, repository);
                 case CommandType.RemoveComment:
                     return new RemoveCommentCommand(commandParameters, repository);
-                case CommandType.ShowPersonActivity:
+                case CommandType.ShowMemberActivity:
                     throw new NotImplementedException();
                 case CommandType.CreateTeam:
                     return new CreateTeamCommand(commandParameters, repository);
@@ -44,8 +44,8 @@ namespace TaskManagement.Core
                     return new ShowTeamsCommand(repository);
                 case CommandType.ShowTeamActivity:
                     return new ShowTeamActivityCommand(commandParameters, repository);
-                case CommandType.AddPersonToTeam:
-                    throw new NotImplementedException();
+                case CommandType.AddMemberToTeam:
+                    return new AddMemberToTeamCommand(commandParameters, repository);
                 case CommandType.ShowTeamMembers:
                     throw new NotImplementedException();
                 case CommandType.ShowTeamBoards:
