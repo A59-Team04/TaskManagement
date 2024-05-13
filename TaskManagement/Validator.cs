@@ -14,6 +14,7 @@ namespace TaskManagement
     {
         private static List<string> _allMemberNames = new List<string>();
         private static List<string> _allTeamNames = new List<string>();
+        private static List<string> _allBoardNames = new List<string>();
 
         public static void ValidateIntRange(int value, int min, int max, string message)
         {
@@ -40,6 +41,16 @@ namespace TaskManagement
             }
 
             _allTeamNames.Add(name);
+        }        
+        public static void ValidateBoardNameUniqueness(string name, string message)
+        {
+            if (_allBoardNames.Contains(name))
+            {
+                throw new ArgumentException(message);
+            }
+
+            _allBoardNames.Add(name);
         }
+
     }
 }

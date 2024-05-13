@@ -10,20 +10,21 @@ namespace TaskManagement.Commands
 {
     public class ShowTeamsCommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 3;
-        public ShowTeamsCommand(IList<string> commandParameters, IRepository repository)
-            : base(commandParameters, repository)
+        public ShowTeamsCommand(IRepository repository)
+            : base(repository)
         {
         }
 
         public override string Execute()
         {
-            if (CommandParameters.Count != ExpectedNumberOfArguments)
+
+            var stringBuilder = new StringBuilder();
+            foreach (var team in this.Repository.Teams)
             {
-                throw new InvalidUserInputException($"Invalid number of arguments. Expected: {ExpectedNumberOfArguments}, Received: {CommandParameters.Count}");
+                stringBuilder.AppendLine(team.Name);
             }
 
-            throw new NotImplementedException();
+            return stringBuilder.ToString().TrimEnd();
         }
     }
 }

@@ -90,37 +90,37 @@ namespace TaskManagement.Models
         public void ChangePriority (PriorityType newPriority)
         {
             Priority = newPriority;
-            AddActivityHistoryItem($"Priority changed to {newPriority}", _activityHistory);
+            AddActivityHistory($"Priority changed to {newPriority}", _activityHistory);
         }
 
         public void ChangeSize (SizeType newSize)
         {
             Size = newSize;
-            AddActivityHistoryItem($"Size changed to {newSize}", _activityHistory);
+            AddActivityHistory($"Size changed to {newSize}", _activityHistory);
         }
         
         public void ChangeStatus (StoryStatus newStatus)
         {
             Status = newStatus;
-            AddActivityHistoryItem($"Status changed to {newStatus}", _activityHistory);   
+            AddActivityHistory($"Status changed to {newStatus}", _activityHistory);   
         }
 
         public void Assign (IMember member)
         {
             Assignee = member;
-            AddActivityHistoryItem($"Assigned to {member.Name}", _activityHistory);
+            AddActivityHistory($"Assigned to {member.Name}", _activityHistory);
         }
 
         public override void AddComment(IComment comment)
         {
             _comment.Add(comment);
-            AddActivityHistoryItem($"Comment added to Story", _activityHistory);
+            AddActivityHistory($"Comment added to Story", _activityHistory);
         }
 
         public override void RemoveComment(IComment comment)
         {
             _comment.Remove(comment);
-            AddActivityHistoryItem($"Comment removed from Story", _activityHistory);
+            AddActivityHistory($"Comment removed from Story", _activityHistory);
         }
 
     }

@@ -11,5 +11,9 @@
         void RemoveBoard(IBoard board);
 
         void AddActivity(string description);
+
+        string ShowActivityHistory();
+        string PrintTeamBoards();
+        string PrintTeamMembers();
     }
 }

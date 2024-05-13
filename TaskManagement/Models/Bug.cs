@@ -108,31 +108,31 @@ namespace TaskManagement.Models
         public void ChangePriority(PriorityType priority)
         {
             Priority = priority;
-            AddActivityHistoryItem($"Priority changed to {priority}", _activityHistory);
+            AddActivityHistory($"Priority changed to {priority}", _activityHistory);
         }
 
         public void ChangeSeverity(SeverityType severity)
         {
             Severity = severity;
-            AddActivityHistoryItem($"Severity changed to {severity}", _activityHistory);
+            AddActivityHistory($"Severity changed to {severity}", _activityHistory);
         }
 
         public void ChangeStatus(BugStatus status)
         {
             BugStatus = status;
-            AddActivityHistoryItem($"Status changed to {status}", _activityHistory);
+            AddActivityHistory($"Status changed to {status}", _activityHistory);
         }
 
         public override void AddComment(IComment comment)
         {
             _comment.Add(comment);
-            AddActivityHistoryItem($"Comment added to Story", _activityHistory);
+            AddActivityHistory($"Comment added to Story", _activityHistory);
         }
 
         public override void RemoveComment(IComment comment)
         {
             _comment.Remove(comment);
-            AddActivityHistoryItem($"Comment removed from Story", _activityHistory);
+            AddActivityHistory($"Comment removed from Story", _activityHistory);
         }
 
         

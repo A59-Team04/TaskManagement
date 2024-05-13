@@ -9,20 +9,18 @@ namespace TaskManagement.Models
 {
     public class Board : IBoard, INameable
     {
-        public const int MinNameLenght = 5;
-        public const int MaxNameLenght = 15;
+        public const int MinNameLength = 5;
+        public const int MaxNameLength = 15;
         public const string InvalidNameError = "Name must be between 5 and 15 characters long!";
         public const string NameIsNotUnique = "The board name provided already exists!";
 
         private string _name;
-        private List<Task> _tasks;
-        private readonly List<ActivityHistoryItem> _boardHistory;
-
-        public Board(string name, List<Task> tasks, List<ActivityHistoryItem> activityHistory)
+        private readonly List<ITask> _tasks = new List<ITask>();
+        private readonly List<IActivityHistoryItem> _boardHistory = new List<IActivityHistoryItem>();
+        private ITeam _team;
+        public Board(string name)
         {
             _name = name;
-            _tasks = tasks;
-            _boardHistory = activityHistory;
         }
 
         public string Name
@@ -33,32 +31,61 @@ namespace TaskManagement.Models
             }
             private set
             {
-                Validator.ValidateIntRange(value.Length, MinNameLenght, MaxNameLenght, InvalidNameError);
-                //this.Team.IsBoardNameUnique(value); // TO DO
+                Validator.ValidateIntRange(value.Length, MinNameLength, MaxNameLength, InvalidNameError);
+                Validator.ValidateBoardNameUniqueness(value, NameIsNotUnique);
                 _name = value;
             }
         }
 
-        //private bool IsBoardNameUnique(string boardName)
-        //{
-        //    // Check if the board name already exists in the team's boards
-        //    return !Team.Instance.Boards.Any(board => board.Name == boardName);
-        //}
-        public List<Task> Tasks
+        public ITeam Team
         {
             get
             {
-                return new List<Task>(_tasks);
+                return _team;
+            }
+            set
+            {
+                _team = value;
             }
         }
 
-        public List<ActivityHistoryItem> ActivityHistory
+        public List<ITask> Tasks
         {
             get
             {
-                return new List<ActivityHistoryItem>(_boardHistory);
+                return new List<ITask>(_tasks);
             }
         }
 
+        public List<IActivityHistoryItem> ActivityHistory
+        {
+            get
+            {
+                return new List<IActivityHistoryItem>(_boardHistory);
+            }
+        }
+
+        public void AddTask(ITask task)
+        {
+            _tasks.Add(task);
+            AddActivityHistory($"Task: {task} added to board.", _boardHistory);
+        }
+
+        public void RemoveTask(ITask task)
+        {
+            _tasks.Remove(task);
+            AddActivityHistory($"Task: {task} removed from board.", _boardHistory);
+        }
+        private void AddActivityHistory(string description, List<IActivityHistoryItem> activityHistory)
+        {
+            var activity = new ActivityHistoryItem(description);
+            activityHistory.Add(activity);
+        }
+
+        public override string ToString()
+        {
+            
+            return $"{this.Name}"; 
+        }
     }
-}
+ }

@@ -49,25 +49,25 @@ namespace TaskManagement.Models
         public void ChangeRating (int newRating)
         {
             Rating = newRating;
-            AddActivityHistoryItem($"Rating changed to {newRating}", _activityHistory);
+            AddActivityHistory($"Rating changed to {newRating}", _activityHistory);
         }
 
         public void ChangeStatus (FeedbackStatus newStatus)
         {
             Status = newStatus;
-            AddActivityHistoryItem($"Status changed to {newStatus}", _activityHistory);
+            AddActivityHistory($"Status changed to {newStatus}", _activityHistory);
         }
 
         public override void AddComment(IComment comment)
         {
             _comment.Add(comment);
-            AddActivityHistoryItem($"Comment added to Feedback", _activityHistory);
+            AddActivityHistory($"Comment added to Feedback", _activityHistory);
         }
 
         public override void RemoveComment(IComment comment)
         {
             _comment.Remove(comment);
-            AddActivityHistoryItem($"Comment removed from Feedback", _activityHistory);
+            AddActivityHistory($"Comment removed from Feedback", _activityHistory);
         }
     }
 }

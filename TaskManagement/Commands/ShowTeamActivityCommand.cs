@@ -11,7 +11,7 @@ namespace TaskManagement.Commands
 {
     public class ShowTeamActivityCommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 3;
+        public const int ExpectedNumberOfArguments = 1;
         public ShowTeamActivityCommand(IList<string> commandParameters, IRepository repository) 
             : base(commandParameters, repository) 
         { 
@@ -29,8 +29,8 @@ namespace TaskManagement.Commands
         }
         private string ShowMemberHistory(string teamName)
         {
-            IMember member = this.Repository.GetMember(teamName);
-            return member.ShowActivityHistory();
+            ITeam team = this.Repository.GetTeam(teamName);
+            return team.ShowActivityHistory();
         }
     }
 }

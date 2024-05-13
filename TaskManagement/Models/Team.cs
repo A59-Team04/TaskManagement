@@ -1,26 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using TaskManagement.Exceptions;
 using TaskManagement.Models.Contracts;
 
 namespace TaskManagement.Models
 {
-    public class Team : ITeam
+    public class Team : ITeam, INameable
     {
-        public const int MinNameLenght = 5;
-        public const int MaxNameLenght = 15;
+        public const int MinNameLength = 5;
+        public const int MaxNameLength = 15;
         public const string InvalidNameError = "Name must be between 5 and 15 characters long!";
-        public const string NameIsNotUnique = "Team name is not unique.";
+        public const string NameIsNotUnique = "Team name already exists!";
 
         private string _name;
-        private List<IMember> _members = new List<IMember>();
-        private List<IBoard> _boards = new List<IBoard>();
+        private readonly List<IMember> _members = new List<IMember>();
+        private readonly List<IBoard> _boards = new List<IBoard>();
         private readonly List<ActivityHistoryItem> _activityHistory = new List<ActivityHistoryItem>();
-        private List<Team> _teams = new List<Team>();
-
 
         public Team(string name)
         {
@@ -33,7 +32,7 @@ namespace TaskManagement.Models
 
             set
             {
-                Validator.ValidateIntRange(value.Length, MinNameLenght, MaxNameLenght, InvalidNameError);
+                Validator.ValidateIntRange(value.Length, MinNameLength, MaxNameLength, InvalidNameError);
                 Validator.ValidateTeamNameUniqueness(value, NameIsNotUnique);
 
                 _name = value;
@@ -77,12 +76,19 @@ namespace TaskManagement.Models
 
         public void AddMember(IMember member)
         {
-            throw new NotImplementedException();
+            if (_members.Contains(member))
+            {
+                throw new EntityAlreadyExistsException($"Member with already exists!");
+            }
+            AddActivity($"Member '{member}' added to Team: {Name}");
+            _members.Add(member);
+            
         }
 
         public void RemoveMember(IMember member)
         {
-            throw new NotImplementedException();
+            AddActivity($"Member '{member}' removed from Team: {Name}");
+            _members.Remove(member);
         }
 
         public List<IBoard> Boards
@@ -95,12 +101,64 @@ namespace TaskManagement.Models
 
         public void AddBoard(IBoard board)
         {
-            throw new NotImplementedException();
+            if (_boards.Contains(board))
+            {
+                throw new EntityAlreadyExistsException("Board already exists!");
+            }
+            AddActivity($"Board '{board}' added to Team: {Name}");
+            _boards.Add(board); 
         }
 
         public void RemoveBoard(IBoard board)
         {
-            throw new NotImplementedException();
+            AddActivity($"Board '{board}' removed from Team: {Name}");
+            _boards.Remove(board);
         }
+
+        public string PrintTeamBoards()
+        {
+            StringBuilder result = new StringBuilder();
+            result.AppendLine($"--Team: {Name}--");
+            result.AppendLine("    Boards:");
+            if (_boards.Count == 0)
+            {
+                result.AppendLine($"No boards in Team: {Name}");
+                return result.ToString();
+            }
+
+            int boardCount = 1;
+
+            foreach (var board in _boards)
+            {
+                result.Append($"      {boardCount++}. ");
+                result.AppendLine(board.ToString());
+            }
+            return result.ToString();
+        }
+
+        public string PrintTeamMembers()
+        {
+
+            StringBuilder result = new StringBuilder();
+            result.AppendLine($"--Team: {Name}--");
+            result.AppendLine("    Members:");
+
+            if (_members.Count == 0)
+            {
+                result.AppendLine($"No members in Team: {Name}");
+                return result.ToString();
+            }
+
+            int membersCount = 1;
+
+            foreach (var member in _members)
+            {
+                result.Append($"      {membersCount++}. ");
+                result.AppendLine(member.ToString());
+            }
+
+            return result.ToString();
+        }
+
     }
 }

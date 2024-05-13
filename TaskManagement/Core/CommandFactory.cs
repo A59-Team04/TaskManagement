@@ -36,22 +36,24 @@ namespace TaskManagement.Core
                     return new AddCommentCommand(commandParameters, repository);
                 case CommandType.RemoveComment:
                     return new RemoveCommentCommand(commandParameters, repository);
-                case CommandType.ShowPersonActivity:
+                case CommandType.ShowMemberActivity:
                     throw new NotImplementedException();
                 case CommandType.CreateTeam:
-                    throw new NotImplementedException();
+                    return new CreateTeamCommand(commandParameters, repository);
                 case CommandType.ShowTeams:
-                    throw new NotImplementedException();
+                    return new ShowTeamsCommand(repository);
                 case CommandType.ShowTeamActivity:
-                    throw new NotImplementedException();
-                case CommandType.AddPersonToTeam:
-                    throw new NotImplementedException();
+                    return new ShowTeamActivityCommand(commandParameters, repository);
+                case CommandType.AddMemberToTeam:
+                    return new AddMemberToTeamCommand(commandParameters, repository);
                 case CommandType.ShowTeamMembers:
-                    throw new NotImplementedException();
+                    return new ShowTeamMembersCommand(commandParameters,repository);
                 case CommandType.ShowTeamBoards:
-                    throw new NotImplementedException();                
+                    return new ShowTeamBoardsCommand(commandParameters, repository);                
                 case CommandType.ShowBoardActivity:
                     throw new NotImplementedException();
+                case CommandType.CreateBoard:
+                    return new CreateBoardCommand(commandParameters, repository);
                 default:
                     throw new InvalidUserInputException($"Command with name: {arguments[0]} doesn't exist!");
             }

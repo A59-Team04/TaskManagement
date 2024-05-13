@@ -5,15 +5,16 @@
         CreateMember,
         CreateTeam,
         ShowMembers,
-        ShowPersonActivity,
+        ShowMemberActivity,
         ShowTeams,
         ShowTeamActivity,
-        AddPersonToTeam,
+        AddMemberToTeam,
         ShowTeamMembers,
         ShowTeamBoards,
         ShowBoardActivity,
         AddComment,
         RemoveComment,
+        CreateBoard,
         Invalid
 
 
