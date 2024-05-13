@@ -13,7 +13,7 @@ namespace TaskManagement.Core.Contracts
         List<ITeam> Teams { get; }
         public ITeam CreateTeam(string name);
         public void AddTeam(ITeam team); 
-        ITeam GetTeam(string personName);
+        ITeam GetTeam(string teamName);
 
         // TODO: Implement the same for Board
         List<IBoard> Boards { get; }

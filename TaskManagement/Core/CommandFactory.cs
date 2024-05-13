@@ -37,11 +37,11 @@ namespace TaskManagement.Core
                 case CommandType.RemoveComment:
                     return new RemoveCommentCommand(commandParameters, repository);
                 case CommandType.ShowMemberActivity:
-                    throw new NotImplementedException();
+                    return new ShowMemberActivityCommand(commandParameters, repository);
                 case CommandType.CreateTeam:
                     return new CreateTeamCommand(commandParameters, repository);
                 case CommandType.ShowTeams:
-                    return new ShowTeamsCommand(repository);
+                    return new ShowTeamsCommand(commandParameters, repository);
                 case CommandType.ShowTeamActivity:
                     return new ShowTeamActivityCommand(commandParameters, repository);
                 case CommandType.AddMemberToTeam:

@@ -9,10 +9,10 @@ using TaskManagement.Models.Contracts;
 
 namespace TaskManagement.Commands
 {
-    public class ShowMemberActivity : BaseCommand
+    public class ShowMemberActivityCommand : BaseCommand
     {
         public const int ExpectedNumberOfArguments = 1;
-        public ShowMemberActivity(IList<string> commandParameters, IRepository repository)
+        public ShowMemberActivityCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
         }
