@@ -11,7 +11,7 @@ namespace TaskManagement.Commands
 {
     public class AddPersonToTeamCommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 3;
+        public const int ExpectedNumberOfArguments = 2;
         public AddPersonToTeamCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
